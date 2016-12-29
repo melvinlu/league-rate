@@ -1,0 +1,28 @@
+{
+  "name": "league-rate",
+  "version": "1.0.0",
+  "description": "displays the win rate of each summoner as well as an aggregate win rate (with additional functionality to come)",
+  "main": "index.js",
+  "engines": {
+    "node": "6.9.2"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melvinlu/league-rate.git"
+  },
+  "author": "Melvin Lu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melvinlu/league-rate/issues"
+  },
+  "homepage": "https://github.com/melvinlu/league-rate#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.79.0"
+  }
+}
