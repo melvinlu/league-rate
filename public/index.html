@@ -5,10 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="league-rate (DEMO)">
+    <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
+    <input type="text" id="summoner1" placeholder="Summoner 1">
+    <p id="summoner1WR"></p><br />
+    <input type="text" id="summoner2" placeholder="Summoner 2">
+    <p id="summoner2WR"></p><br />
+    <input type="text" id="summoner3" placeholder="Summoner 3">
+    <p id="summoner3WR"></p><br />
+    <input type="text" id="summoner4" placeholder="Summoner 4">
+    <p id="summoner4WR"></p><br />
+    <input type="text" id="summoner5" placeholder="Summoner 5">
+    <p id="summoner5WR"></p><br />
     <button onclick="calculateRates()">Go!</button>
-    <p id="test"></p>
 </body>
 </html>

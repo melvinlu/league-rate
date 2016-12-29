@@ -1,5 +1,6 @@
 #Installation
 ### Clone the repository and install the dependencies:
+#### (both node.js and the heroku CLI are required)
 
 ```
 git clone https://github.com/melvinlu/league-rate.git
