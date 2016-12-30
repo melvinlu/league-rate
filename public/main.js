@@ -21,7 +21,7 @@ function calculateRates() {
     // Do nothing if invalid query!
     if (!valid) {
         document.getElementById("calculateAnimation").style.display = 'none';
-        document.getElementById("aggregateWR").innerHTML = 'You did not enter any summoner names!';
+        document.getElementById("aggregateWR").innerHTML = 'No summoners entered!';
         return;
     }
     // Convert each name to lowercase and remove all whitespaces
@@ -44,8 +44,8 @@ function calculateRates() {
         if (rates[4])
             document.getElementById("summoner5WR").innerHTML = rates[4] + '%';
         document.getElementById("aggregateWR").innerHTML = rates[5] >= 50 ?
-            'Aggregate: ' + rates[5] + '%!<br/>Good luck!' :
-            'Aggregate: ' + rates[5] + '%...<br/>Good luck!';
+            'Aggregate: ' + rates[5] + '%!' :
+            'Aggregate: ' + rates[5] + '%...';
         // Turn off calculating animation
         document.getElementById("calculateAnimation").style.display = 'none';
     });

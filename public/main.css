@@ -1,10 +1,12 @@
 html {
     height: 100%;
+    overflow: auto;
 }
 
 body {
     background-image: url(bg.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .navbar .navbar-custom .navbar-custom .navbar-toggle .icon-bar {
@@ -107,6 +109,7 @@ body {
 
 .jumbotron {
     margin-top: 10%;
+    padding-bottom: 0;
     border: 1px solid black;
     background: rgba(255, 255, 255, 0.75);
 }
@@ -153,7 +156,7 @@ body {
     bottom: 0;
 }
 
-/* TODO: more efficiently and effectively manage jumbotron size for smaller screens!*/
+/* TODO: more efficiently and effectively manage jumbotron size & footer for smaller screens!*/
 @media(max-width: 800px) {
     .jumbotron {
         margin-top: 35%;
@@ -163,5 +166,11 @@ body {
 @media(max-width: 600px) {
     .jumbotron {
         margin-top: 30%;
+    }
+}
+
+@media(max-height: 450px) {
+    #footer {
+        display: none;
     }
 }
