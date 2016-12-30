@@ -93,7 +93,7 @@ function calculateWinRates(summonerIdsMap, summonerIdsArr, summoners, socket) {
                             summoners[i]))
                         );
             }
-            summonerWRs.push(aggregateWins / aggregateGames * 100);
+            summonerWRs.push(Math.round(aggregateWins / aggregateGames * 100));
             // Send the data back to the client
             socket.emit('Calculated Rates', summonerWRs);
         })

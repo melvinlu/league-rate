@@ -1,10 +1,11 @@
 function calculateRates() {
-    // Clear any previous text
+    // Clear any previous text & start calculating animation
     document.getElementById("summoner1WR").innerHTML = "";
     document.getElementById("summoner2WR").innerHTML = "";
     document.getElementById("summoner3WR").innerHTML = "";
     document.getElementById("summoner4WR").innerHTML = "";
     document.getElementById("summoner5WR").innerHTML = "";
+    document.getElementById("calculateAnimation").style.display = 'block';
     // Store the summoner names to send to the node server
     var summoners = [
         document.getElementById("summoner1").value,
@@ -35,5 +36,7 @@ function calculateRates() {
         document.getElementById("aggregateWR").innerHTML = rates[5] >= 50 ?
             'Aggregate ' + rates[5] + '%. Good sign!' :
             'Aggregate ' + rates[5] + '%. Hmm..';
+        // Turn off calculating animation
+        document.getElementById("calculateAnimation").style.display = 'none';
     });
 }

@@ -5,21 +5,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="league-rate (DEMO)">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
     <input type="text" id="summoner1" placeholder="Summoner 1">
-    <p id="summoner1WR"></p><br />
+    <label for="summoner1" id="summoner1WR"></label>
+    <br />
     <input type="text" id="summoner2" placeholder="Summoner 2">
-    <p id="summoner2WR"></p><br />
+    <label for="summoner2" id="summoner2WR"></label>
+    <br />
     <input type="text" id="summoner3" placeholder="Summoner 3">
-    <p id="summoner3WR"></p><br />
+    <label for="summoner3" id="summoner3WR"></label>
+    <br />
     <input type="text" id="summoner4" placeholder="Summoner 4">
-    <p id="summoner4WR"></p><br />
+    <label for="summoner4" id="summoner4WR"></label>
+    <br />
     <input type="text" id="summoner5" placeholder="Summoner 5">
-    <p id="summoner5WR"></p><br />
+    <label for="summoner5" id="summoner5WR"></label>
+    <br />
     <button onclick="calculateRates()">Go!</button>
+    <p class="calculating" id ="calculateAnimation">
+        Calculating&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>
+    </p>
     <p id="aggregateWR"></p>
 </body>
 </html>
