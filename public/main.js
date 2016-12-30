@@ -1,10 +1,11 @@
 function calculateRates() {
     // Clear any previous text & start calculating animation
-    document.getElementById("summoner1WR").innerHTML = "";
-    document.getElementById("summoner2WR").innerHTML = "";
-    document.getElementById("summoner3WR").innerHTML = "";
-    document.getElementById("summoner4WR").innerHTML = "";
-    document.getElementById("summoner5WR").innerHTML = "";
+    document.getElementById("summoner1WR").innerHTML = "%";
+    document.getElementById("summoner2WR").innerHTML = "%";
+    document.getElementById("summoner3WR").innerHTML = "%";
+    document.getElementById("summoner4WR").innerHTML = "%";
+    document.getElementById("summoner5WR").innerHTML = "%";
+    document.getElementById("aggregateWR").innerHTML = "";
     document.getElementById("calculateAnimation").style.display = 'block';
     // Store the summoner names to send to the node server
     var summoners = [
@@ -14,6 +15,15 @@ function calculateRates() {
         document.getElementById("summoner4").value,
         document.getElementById("summoner5").value
     ];
+    // See if any summoner names were entered
+    var valid = false;
+    summoners.map((summoner) => {if (summoner != "") valid = true;});
+    // Do nothing if invalid query!
+    if (!valid) {
+        document.getElementById("calculateAnimation").style.display = 'none';
+        document.getElementById("aggregateWR").innerHTML = 'You did not enter any summoner names!';
+        return;
+    }
     // Convert each name to lowercase and remove all whitespaces
     summoners = summoners.map(summoner =>
         summoner.toLowerCase().replace(/\s/g,''));
@@ -34,8 +44,8 @@ function calculateRates() {
         if (rates[4])
             document.getElementById("summoner5WR").innerHTML = rates[4] + '%';
         document.getElementById("aggregateWR").innerHTML = rates[5] >= 50 ?
-            'Aggregate ' + rates[5] + '%. Good sign!' :
-            'Aggregate ' + rates[5] + '%. Hmm..';
+            'Aggregate: ' + rates[5] + '%!<br/>Good luck!' :
+            'Aggregate: ' + rates[5] + '%...<br/>Good luck!';
         // Turn off calculating animation
         document.getElementById("calculateAnimation").style.display = 'none';
     });

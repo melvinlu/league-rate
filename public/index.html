@@ -1,34 +1,128 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>league-rate (DEMO)</title>
+    <title>league-rate (WIP)</title>
+    <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="league-rate (DEMO)">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <meta name="description" content="league-rate (WIP)">
+    <!-- Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="main.js"></script>
 </head>
 <body>
-    <input type="text" id="summoner1" placeholder="Summoner 1">
-    <label for="summoner1" id="summoner1WR"></label>
-    <br />
-    <input type="text" id="summoner2" placeholder="Summoner 2">
-    <label for="summoner2" id="summoner2WR"></label>
-    <br />
-    <input type="text" id="summoner3" placeholder="Summoner 3">
-    <label for="summoner3" id="summoner3WR"></label>
-    <br />
-    <input type="text" id="summoner4" placeholder="Summoner 4">
-    <label for="summoner4" id="summoner4WR"></label>
-    <br />
-    <input type="text" id="summoner5" placeholder="Summoner 5">
-    <label for="summoner5" id="summoner5WR"></label>
-    <br />
-    <button onclick="calculateRates()">Go!</button>
-    <p class="calculating" id ="calculateAnimation">
-        Calculating&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>
-    </p>
-    <p id="aggregateWR"></p>
+    <section id="about">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container navbar-custom">
+                <div class="navbar-header page-scroll navbar-custom">
+                    <button type="button"
+                        class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll navbar-custom" href="/">league-rate</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right navbar-custom">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Welcome!</h1>
+            <form class="form-group">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-horizontal">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="summoner1"
+                               placeholder="Summoner 1">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="summoner1" class="control-label" id="summoner1WR">%</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-horizontal">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="summoner2"
+                               placeholder="Summoner 2">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="summoner2" class="control-label" id="summoner2WR">%</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-horizontal">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="summoner3"
+                               placeholder="Summoner 3">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="summoner3" class="control-label" id="summoner3WR">%</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-horizontal">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="summoner4"
+                               placeholder="Summoner 4">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="summoner4" class="control-label" id="summoner4WR">%</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-group">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="summoner5"
+                               placeholder="Summoner 5">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="summoner5" class="control-label" id="summoner5WR">%</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
+                <button type="button" class="btn btn-default btn-block"
+                        onclick="calculateRates()">Go!</button></div></div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
+                        <p class="calculating" id ="calculateAnimation">
+                           Calculating&nbsp;<span>.</span>&nbsp;<span>.</span>&nbsp;<span>.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p id="aggregateWR" class="text-center"></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="btn-group btn-group-justified btn-group-fixed-bottom" role="group">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">Pre-Game</button>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">In-Game</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

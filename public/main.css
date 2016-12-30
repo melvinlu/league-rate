@@ -1,12 +1,125 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(bg.jpg);
+    background-size: cover;
+}
+
+.navbar .navbar-custom .navbar-custom .navbar-toggle .icon-bar {
+    background-color: #1f8ecd;
+}
+
+.navbar .navbar-custom .navbar-custom .navbar-toggle {
+    background-color: white;
+    border-color: white;
+}
+
+.navbar-default {
+    background-color: #1f8ecd;
+    border-color: transparent;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+    border: none;
+}
+
+.navbar-default .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: white;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    border-radius: 3px;
+}
+
+.navbar-default.navbar-shrink {
+    background-color: #1f8ecd;
+    padding: 10px 0;
+}
+
+.navbar-default.navbar-shrink .navbar-brand {
+    font-size: 1.5em;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:active,
+.navbar-default .navbar-brand.active {
+    color: white;
+}
+
+.navbar-default .navbar-collapse {
+    border-color: rgba(255, 255, 255, 0.02);
+    background-color: #1f8ecd;
+}
+
+.navbar-default .navbar-toggle {
+    background-color: #white;
+    border-color: #white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: white;
+}
+
+.navbar-default .nav li a {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus {
+    color: #1f8ecd;
+    background-color: white;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    border-radius: 0;
+    color: white;
+    background-color: #1f8ecd;
+}
+
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #1f8ecd;
+    background-color: #white;
+}
+
+.btn-default:hover {
+    background-color: #1f8ecd;
+    color: white;
+}
+
+.jumbotron {
+    margin-top: 10%;
+    border: 1px solid black;
+    background: rgba(255, 255, 255, 0.75);
+}
+
 @keyframes blink {
     0% {
-      opacity: .2;
+        opacity: .2;
     }
     20% {
-      opacity: 1;
+        opacity: 1;
     }
     100% {
-      opacity: .2;
+        opacity: .2;
     }
 }
 
@@ -27,4 +140,28 @@
 
 .calculating span:nth-child(3) {
     animation-delay: .4s;
+}
+
+#footer {
+    z-index: 3;
+    position: absolute;
+    display: block;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 2%;
+    height: 5%;
+    bottom: 0;
+}
+
+/* TODO: more efficiently and effectively manage jumbotron size for smaller screens!*/
+@media(max-width: 800px) {
+    .jumbotron {
+        margin-top: 35%;
+    }
+}
+
+@media(max-width: 600px) {
+    .jumbotron {
+        margin-top: 30%;
+    }
 }
