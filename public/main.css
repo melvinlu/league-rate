@@ -9,6 +9,10 @@ body {
     background-attachment: fixed;
 }
 
+h5 {
+    margin-top: 0;
+}
+
 .navbar .navbar-custom .navbar-custom .navbar-toggle .icon-bar {
     background-color: #1f8ecd;
 }
@@ -109,6 +113,7 @@ body {
 
 .jumbotron {
     margin-top: 10%;
+    padding-top: 0;
     padding-bottom: 0;
     border: 1px solid black;
     background: rgba(255, 255, 255, 0.75);
@@ -128,6 +133,7 @@ body {
 
 .calculating {
     display: none;
+    padding-bottom: 0;
 }
 
 .calculating span {
