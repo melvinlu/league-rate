@@ -169,13 +169,13 @@ h5 {
 /* TODO: more efficiently and effectively manage jumbotron size & footer for smaller screens!*/
 @media(max-width: 768px) {
     .jumbotron {
-      margin-top: 15%;
+      margin-top: 20%;
     }
 }
 
 @media(max-width: @screen-sm-min) {
     .jumbotron {
-        margin-top: 15%;
+        margin-top: 20%;
         margin-bottom: 10%;
     }
 }
