@@ -13,6 +13,10 @@ h5 {
     margin-top: 0;
 }
 
+.jumbotron .row .small {
+    font-size: 1.2em;
+}
+
 .navbar .navbar-custom .navbar-custom .navbar-toggle .icon-bar {
     background-color: #1f8ecd;
 }
@@ -163,15 +167,30 @@ h5 {
 }
 
 /* TODO: more efficiently and effectively manage jumbotron size & footer for smaller screens!*/
-@media(max-width: 800px) {
+@media(max-width: 768px) {
     .jumbotron {
-        margin-top: 35%;
+      margin-top: 15%;
     }
 }
 
-@media(max-width: 600px) {
+@media(max-width: @screen-sm-min) {
     .jumbotron {
-        margin-top: 30%;
+        margin-top: 15%;
+        margin-bottom: 10%;
+    }
+}
+
+@media(max-width: @screen-md-min) {
+    .jumbotron {
+        margin-top: 15%;
+        margin-bottom: 10%;
+    }
+}
+
+@media(max-width: @screen-lg-min) {
+    .jumbotron {
+        margin-top: 15%;
+        margin-bottom: 10%;
     }
 }
 

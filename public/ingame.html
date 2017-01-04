@@ -38,7 +38,7 @@
                             <a href="index.html">Home</a>
                         </li>
                         <li>
-                            <a href="ingame.html">Contact</a>
+                            <a href="#contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -47,14 +47,14 @@
     </section>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="text-center">Welcome!</h1>
+            <h2 class="text-center">In-Game</h2>
             <h5 class="text-center">
                 <strong>These stats apply only for <em>ranked</em> games.</strong>
             </h5>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <p class="hidden-xs hidden-sm col-sm-6">
-                        Summoners
+                        Your Team
                     </p>
                     <p class="hidden-xs hidden-sm col-sm-2">
                         Recent
@@ -66,7 +66,7 @@
                         Streak
                     </p>
                     <p class="hidden-xs hidden-md hidden-lg col-sm-6 small">
-                        Summoners
+                        Your Team
                     </p>
                     <p class="hidden-xs hidden-md hidden-lg col-sm-2 small">
                         Recent
@@ -78,7 +78,7 @@
                         Streak
                     </p>
                     <h6 class="col-xs-12 hidden-sm hidden-md hidden-lg text-center">
-                        Summoners (Recent / Season / Streak)
+                        Your Team (Recent / Season / Streak)
                     </h6>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
                     <div class="col-xs-6">
                         <input type="text" class="form-control" id="summoner1"
-                               placeholder="Summoner 1">
+                               placeholder="Your Summoner IGN">
                     </div>
                     <div class="col-xs-2">
                         <label for="summoner1" class="control-label" id="summoner1WR">%</label>
@@ -148,6 +148,105 @@
                         <h6>Summoner 5 currently disabled</h6>
                     </div>
                 </div>
+
+                <!-- Enemy team stats -->
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <p class="hidden-xs hidden-sm col-sm-6">
+                            Enemy Team
+                        </p>
+                        <p class="hidden-xs hidden-sm col-sm-2">
+                            Recent
+                        </p>
+                        <p class="hidden-xs hidden-sm col-sm-2">
+                            Season
+                        </p>
+                        <p class="hidden-xs hidden-sm col-sm-2">
+                            Streak
+                        </p>
+                        <p class="hidden-xs hidden-md hidden-lg col-sm-6 small">
+                            Enemy Team
+                        </p>
+                        <p class="hidden-xs hidden-md hidden-lg col-sm-2 small">
+                            Recent
+                        </p>
+                        <p class="hidden-xs hidden-md hidden-lg col-sm-2 small">
+                            Season
+                        </p>
+                        <p class="hidden-xs hidden-md hidden-lg col-sm-2 small">
+                            Streak
+                        </p>
+                        <h6 class="col-xs-12 hidden-sm hidden-md hidden-lg text-center">
+                            Enemy Team (Recent / Season / Streak)
+                        </h6>
+                    </div>
+                </div>
+                <form class="form-group">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="summoner1"
+                                   placeholder="Summoner 1">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner1" class="control-label" id="summoner1WR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner1" class="control-label" id="summoner1SeasonWR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner1" class="control-label" id="summoner1Streak">0</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="summoner2"
+                                   placeholder="Summoner 2">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner2" class="control-label" id="summoner2WR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner2" class="control-label" id="summoner2SeasonWR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner2" class="control-label" id="summoner2Streak">0</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="summoner3"
+                                   placeholder="Summoner 3">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner3" class="control-label" id="summoner3WR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner3" class="control-label" id="summoner3SeasonWR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner3" class="control-label" id="summoner3Streak">0</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="summoner4"
+                                   placeholder="Summoner 4">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner4" class="control-label" id="summoner4WR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner4" class="control-label" id="summoner4SeasonWR">%</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="summoner4" class="control-label" id="summoner4Streak">0</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div class="col-xs-12">
+                            <h6>Summoner 5 currently disabled</h6>
+                        </div>
+                    </div>
                 <!--
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-group">
                     <div class="col-xs-6">
