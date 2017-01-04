@@ -185,3 +185,13 @@ function stopAnimations() {
     // Turn off calculating animation
     document.getElementById("calculateAnimation").style.display = 'none';
 }
+
+function goToPregamePage() {
+  //go back to pregame page
+  window.location.href = "index.html"
+}
+
+function goToIngamePage() {
+  //go to ingame page
+  window.location.href = "ingame.html"
+}
