@@ -1,19 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>league-rate (WIP)</title>
-    <!-- Meta -->
+    <title>Summoner Stats</title>
+    <!-- Meta Data -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="league-rate (WIP)">
+    <meta name="description" content="Summoner Stats">
     <!-- Dependencies -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="main.js"></script>
 </head>
 <body>
     <section id="about">
@@ -30,15 +28,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll navbar-custom" href="index.html">league-rate</a>
+                    <a class="navbar-brand page-scroll navbar-custom" href="/">Summoner Stats</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right navbar-custom">
                         <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="#contact">Contact</a>
+                            <a href="/about.html">About</a>
                         </li>
                     </ul>
                 </div>
@@ -188,13 +183,19 @@
                                    placeholder="Summoner 1">
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner1" class="control-label" id="summoner1WR">%</label>
+                            <label for="summoner1" class="control-label" id="summoner1WR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner1" class="control-label" id="summoner1SeasonWR">%</label>
+                            <label for="summoner1" class="control-label" id="summoner1SeasonWR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner1" class="control-label" id="summoner1Streak">0</label>
+                            <label for="summoner1" class="control-label" id="summoner1Streak">
+                                0
+                            </label>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
@@ -203,13 +204,19 @@
                                    placeholder="Summoner 2">
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner2" class="control-label" id="summoner2WR">%</label>
+                            <label for="summoner2" class="control-label" id="summoner2WR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner2" class="control-label" id="summoner2SeasonWR">%</label>
+                            <label for="summoner2" class="control-label" id="summoner2SeasonWR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner2" class="control-label" id="summoner2Streak">0</label>
+                            <label for="summoner2" class="control-label" id="summoner2Streak">
+                                0
+                            </label>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
@@ -218,13 +225,19 @@
                                    placeholder="Summoner 3">
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner3" class="control-label" id="summoner3WR">%</label>
+                            <label for="summoner3" class="control-label" id="summoner3WR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner3" class="control-label" id="summoner3SeasonWR">%</label>
+                            <label for="summoner3" class="control-label" id="summoner3SeasonWR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner3" class="control-label" id="summoner3Streak">0</label>
+                            <label for="summoner3" class="control-label" id="summoner3Streak">
+                                0
+                            </label>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-horizontal">
@@ -233,13 +246,19 @@
                                    placeholder="Summoner 4">
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner4" class="control-label" id="summoner4WR">%</label>
+                            <label for="summoner4" class="control-label" id="summoner4WR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner4" class="control-label" id="summoner4SeasonWR">%</label>
+                            <label for="summoner4" class="control-label" id="summoner4SeasonWR">
+                                %
+                            </label>
                         </div>
                         <div class="col-xs-2">
-                            <label for="summoner4" class="control-label" id="summoner4Streak">0</label>
+                            <label for="summoner4" class="control-label" id="summoner4Streak">
+                                0
+                            </label>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -294,10 +313,10 @@
     <div id="footer">
         <div class="btn-group btn-group-justified btn-group-fixed-bottom" role="group">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" onclick="goToPregamePage()">Pre-Game</button>
+                <a href="/"><button type="button" class="btn btn-default">Pre-Game</button></a>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" onclick="goToIngamePage()">In-Game</button>
+                <a href="/"><button type="button" class="btn btn-default">In-Game</button></a>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
 // Hide API key
 
 // Declare modules to use
-var express = require('express');
+var express = require('express'),
     app = express(),
     path = require('path'),
     server = require('http').Server(app),
