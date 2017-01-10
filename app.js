@@ -1,10 +1,10 @@
 // TODO:
-// Minify files
-// Implement caching
-// Implement rate limit avoiding mechanism
-// Implement error handling mechanism
-// Allow 'enter' for submission (add event listener)
-// Hide API key
+// * Minify files
+// * Implement caching
+// * Implement rate limit avoiding mechanism
+// * Implement error handling mechanism
+// * Allow 'enter' for submission (add event listener)
+// * Hide API key
 
 // Declare modules to use
 var express = require('express'),
@@ -44,8 +44,7 @@ io.on('connection', function (socket) {
                     summonerIdsMap.set(key, summonerData[key].id);
                     summonerIdsArr.push(summonerData[key].id);
                 });
-                calculateRecentStats(summonerIdsMap, summonerIdsArr,
-                    summoners, socket);
+                calculateRecentStats(summonerIdsMap, summonerIdsArr, summoners, socket);
             })
             .catch(function(err) {
                 socket.emit('Calculated Stats', [], [], []);
@@ -110,16 +109,8 @@ function calculateRecentStats(summonerIdsMap, summonerIdsArr, summoners, socket)
     return Promise.all(promises)
         .then(function(data) {
             for (var i = 0; i < summoners.length; ++i) {
-                summonerWRs.push(
-                    summonerRates.get(
-                        summonerIdsMap.get(
-                            summoners[i]))
-                        );
-                summonerStrks.push(
-                    summonerStreaks.get(
-                        summonerIdsMap.get(
-                            summoners[i]))
-                        );
+                summonerWRs.push(summonerRates.get(summonerIdsMap.get(summoners[i])));
+                summonerStrks.push(summonerStreaks.get(summonerIdsMap.get(summoners[i])));
             }
             summonerWRs.push(Math.round(aggregateWins / aggregateGames * 100));
             // Now calculate all win rates for each summoner
@@ -170,11 +161,7 @@ function calculateSeasonRates(summonerIdsMap, summonerIdsArr, summoners,
     return Promise.all(promises)
         .then(function(data) {
             for (var i = 0; i < summoners.length; ++i) {
-                summonerSeasonWRs.push(
-                    summonerSeasonRates.get(
-                        summonerIdsMap.get(
-                            summoners[i]))
-                        );
+                summonerSeasonWRs.push(summonerSeasonRates.get(summonerIdsMap.get(summoners[i])));
             }
             if (!aggregateGames) {
                 summonerSeasonWRs.push(0);
