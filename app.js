@@ -4,9 +4,9 @@
 // * Implement rate limit avoiding mechanism
 // * Implement error handling mechanism
 // * Allow 'enter' for submission (add event listener)
-// * Hide API key
 
 // Declare modules to use
+require('dotenv').config();
 var express = require('express'),
     app = express(),
     path = require('path'),
@@ -15,7 +15,7 @@ var express = require('express'),
     request = require('request-promise'),
     port = process.env.PORT || 5000;
 
-var API_KEY = 'b21a2bfa-331f-451c-aaa9-f27d08153e87';
+var API_KEY = process.env.API_KEY;
 
 // Allow the server to listen to the provided port
 server.listen(port, function() {

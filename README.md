@@ -11,3 +11,7 @@ npm install
 Now run _summoner-stats_ with `npm start` or `heroku local web` and navigate to `localhost:5000` in a web browser.
 
 View the heroku instance at [https://desolate-tor-17957.herokuapp.com/](https://desolate-tor-17957.herokuapp.com).
+
+### Note
+You will need to obtain and define the appropriate API key in a .env file in the root directory
+in order to use this application!

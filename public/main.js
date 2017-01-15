@@ -15,7 +15,7 @@ function calculateStats() {
         displaySummoner2Stats(recentRates, seasonRates, currentStreaks);
         displaySummoner3Stats(recentRates, seasonRates, currentStreaks);
         displaySummoner4Stats(recentRates, seasonRates, currentStreaks);
-        // displaySummoner5Stats(recentRates, seasonRates, currentStreaks);
+        displaySummoner5Stats(recentRates, seasonRates, currentStreaks);
         displayAggregateStats(recentRates, seasonRates, seasonRates);
         stopAnimations();
     });
@@ -26,22 +26,22 @@ function clearText() {
     document.getElementById("summoner2WR").innerHTML = "%";
     document.getElementById("summoner3WR").innerHTML = "%";
     document.getElementById("summoner4WR").innerHTML = "%";
-    // document.getElementById("summoner5WR").innerHTML = "%";
+    document.getElementById("summoner5WR").innerHTML = "%";
     document.getElementById("summoner1SeasonWR").innerHTML = "%";
     document.getElementById("summoner2SeasonWR").innerHTML = "%";
     document.getElementById("summoner3SeasonWR").innerHTML = "%";
     document.getElementById("summoner4SeasonWR").innerHTML = "%";
-    // document.getElementById("summoner5SeasonWR").innerHTML = "%";
+    document.getElementById("summoner5SeasonWR").innerHTML = "%";
     document.getElementById("summoner1Streak").style.color = "";
     document.getElementById("summoner2Streak").style.color = "";
     document.getElementById("summoner3Streak").style.color = "";
     document.getElementById("summoner4Streak").style.color = "";
-    // document.getElementById("summoner5Streak").style.color = "";
+    document.getElementById("summoner5Streak").style.color = "";
     document.getElementById("summoner1Streak").innerHTML = "0";
     document.getElementById("summoner2Streak").innerHTML = "0";
     document.getElementById("summoner3Streak").innerHTML = "0";
     document.getElementById("summoner4Streak").innerHTML = "0";
-    // document.getElementById("summoner5Streak").innerHTML = "0";
+    document.getElementById("summoner5Streak").innerHTML = "0";
     document.getElementById("aggregateWR").innerHTML = "";
     document.getElementById("aggregateSeasonWR").innerHTML = "";
     document.getElementById("calculateAnimation").style.display = 'block';
@@ -53,8 +53,8 @@ function getSummonerNames() {
         document.getElementById("summoner2").value,
         document.getElementById("summoner3").value,
         document.getElementById("summoner4").value,
+        document.getElementById("summoner5").value
     ];
-    // document.getElementById("summoner5").value
     // Convert each name to lowercase and remove all whitespaces
     summoners = summoners.map(summoner => summoner.toLowerCase().replace(/\s/g,''));
     return summoners;
@@ -168,14 +168,13 @@ function displaySummoner5Stats(recentRates, seasonRates, currentStreaks) {
 }
 
 function displayAggregateStats(recentRates, seasonRates) {
-    // Use 5th element when restoring summoner 5
-    if (recentRates[4] || seasonRates[4]) {
-        document.getElementById("aggregateWR").innerHTML = recentRates[4] >= 50 ?
-            '<strong>Recent Aggregate:</strong> ' + recentRates[4] + '%!' :
-            '<strong>Recent Aggregate:</strong> ' + recentRates[4] + '%...';
-        document.getElementById("aggregateSeasonWR").innerHTML = seasonRates[4] >= 50 ?
-            '<strong>Season Aggregate:</strong> ' + seasonRates[4] + '%!' :
-            '<strong>Season Aggregate:</strong> ' + seasonRates[4] + '%...';
+    if (recentRates[5] || seasonRates[5]) {
+        document.getElementById("aggregateWR").innerHTML = recentRates[5] >= 50 ?
+            '<strong>Recent Aggregate:</strong> ' + recentRates[5] + '%!' :
+            '<strong>Recent Aggregate:</strong> ' + recentRates[5] + '%...';
+        document.getElementById("aggregateSeasonWR").innerHTML = seasonRates[5] >= 50 ?
+            '<strong>Season Aggregate:</strong> ' + seasonRates[5] + '%!' :
+            '<strong>Season Aggregate:</strong> ' + seasonRates[5] + '%...';
     } else {
         document.getElementById("aggregateWR").innerHTML = 'Invalid query, or wait a little!';
     }
