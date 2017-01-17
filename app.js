@@ -132,7 +132,7 @@ function calculateSeasonRates(summonerIdsMap, summonerIdsArr, summoners,
 
     // Queue the promise of each request
     var promises = summonerIdsArr.map(function(summonerId) {
-        url = baseUrl + summonerId + '/summary?season=2017&api_key=' + API_KEY;
+        url = baseUrl + summonerId + '/summary?season=SEASON2017&api_key=' + API_KEY;
         return request(url)
             .then(function(response) {
                 var summonerStats = JSON.parse(response);
