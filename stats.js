@@ -12,6 +12,7 @@ module.exports = class Stats {
             this.currentStreak = 0;
             this.rankedGames = 0;
             this.streakSet = false;
+            this.streakStart = 0;
             this.rankedIndex = 0;
             if (type == 'recent') {
                 this.baseUrl = 'https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/';

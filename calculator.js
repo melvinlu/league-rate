@@ -86,8 +86,13 @@ module.exports = class Calculator {
 };
 
 function countGames(response, rs, summonerId) {
-    var recentData = JSON.parse(response);
-    var gameCount = recentData.games.length;
+    rs.wins = 0;
+    rs.currentStreak = 0;
+    rs.rankedGames = 0;
+    rs.streakSet = false;
+    rs.streakStart = 0;
+    var recentData = JSON.parse(response),
+        gameCount = recentData.games.length;
     // Algorithm to count games & wins
     for (var i = 0; i < gameCount; ++i) {
         if (recentData.games[i].subType == 'RANKED_SOLO_5x5') {
@@ -95,18 +100,19 @@ function countGames(response, rs, summonerId) {
             ++rs.aggregateGames;
             if (!rs.currentStreak) {
                 rs.currentStreak = (recentData.games[i].stats.win) ? 1 : -1;
+                rs.streakStart = i;
             }
             if (recentData.games[i].stats.win) {
                 ++rs.wins;
                 ++rs.aggregateWins;
                 if (!rs.streakSet && rs.currentStreak > 0) {
-                    if (i) ++rs.currentStreak;
+                    if (i != rs.streakStart) ++rs.currentStreak;
                 } else {
                     rs.streakSet = true;
                 }
             } else {
                 if (!rs.streakSet && rs.currentStreak < 0) {
-                    if (i) --rs.currentStreak;
+                    if (i != rs.streakStart) --rs.currentStreak;
                 } else {
                     rs.streakSet = true;
                 }
