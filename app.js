@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
             var promises = [
                 Promise.resolve(Calculator.calculateRecentStats(summoners)),
                 Promise.resolve(Calculator.calculateSeasonRates(summoners))
-            ]
+            ];
             Promise.all(promises).then(function() {
                     socket.emit(
                         'Calculated Stats', summoners.WRs, summoners.seasonWRs, summoners.streaks
