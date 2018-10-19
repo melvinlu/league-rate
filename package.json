@@ -7,9 +7,9 @@
     "node": "6.9.2"
   },
   "scripts": {
-    "build": "webpack",
     "dev": "webpack --watch",
-    "start": "node src/server/app.js",
+    "start": "webpack && node src/server/app.js",
+    "start-server": "node src/server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
