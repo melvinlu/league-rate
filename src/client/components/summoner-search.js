@@ -25,11 +25,19 @@ export class SummonerSearch extends Component {
   render() {
     return (
       <div>
-        <div className="row mt-5">
-          <div className="col-12 col-md-10 col-lg-8 ml-auto mr-auto">
-            <form className="card card-sm">
-              <div className="card-body row no-gutters align-items-center">
-                <div className="col mr-2">
+        <div className="row">
+          <div
+            className="card mx-auto mt-3 "
+            style={{ height: "15rem", width: "65%" }}
+          >
+            <img className="card-img-top" src="images/banner.jpg" />
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-12 col-md-10 col-lg-8 mx-auto">
+            <form>
+              <div className="row no-gutters">
+                <div className="col mr-1 ml-2">
                   <input
                     className="form-control form-control-lg form-control-borderless"
                     type="search"
@@ -37,7 +45,7 @@ export class SummonerSearch extends Component {
                     onChange={this.handleInput}
                   />
                 </div>
-                <div className="col-auto">
+                <div className="col-auto mr-2 ml-1">
                   <button
                     className="btn btn-lg btn-primary"
                     type="submit"

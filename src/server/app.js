@@ -4,26 +4,53 @@ let express = require("express"),
   app = express(),
   path = require("path"),
   superagent = require("superagent"),
-  port = process.env.PORT || 8080,
-  api_key = process.env.API_KEY;
+  port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
 app.engine("pug", require("pug").__express);
 app.set("views", __dirname);
 
-// API
-app.get("/search/:id", (req, res) => {
-  let summonerId = req.params.id;
-  let url = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerId}?api_key=${api_key}`;
+let statsHelper = require("./stats.js");
 
-  superagent
-    .get(url)
+// API
+app.get("/search/:name", (req, res) => {
+  statsHelper
+    .getOverallInfo(req.params.name)
     .then(data => {
-      res.send(data);
+      let name = data.name;
+      let stats = data.rankedStats;
+
+      statsHelper
+        .getRecentInfo(data.accountId)
+        .then(data => {
+          if (stats) {
+            res.send({
+              name: name,
+              tier: stats.tier,
+              rank: stats.rank,
+              points: stats.leaguePoints,
+              wins: stats.wins,
+              losses: stats.losses
+            });
+          } else {
+            res.send({
+              name: name
+            });
+          }
+        })
+        .catch(err => {
+          console.log(`Error!: ${err}`);
+          res.send({
+            name: summonerName
+          });
+        });
     })
     .catch(err => {
       console.log(`Error!: ${err}`);
+      res.send({
+        name: summonerName
+      });
     });
 });
 
