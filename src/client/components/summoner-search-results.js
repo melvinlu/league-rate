@@ -1,4 +1,5 @@
-import LoadingAnimation from "./loading-animation";
+import { LoadingAnimation } from "./loading-animation";
+import { StatsHeader } from "./stats-header";
 import React, { Component } from "react";
 import $ from "jquery";
 
@@ -12,43 +13,116 @@ let rankToColor = {
   Challenger: "#996515"
 };
 
-const StatsRow = ({ name, tier, rank, points, wins, losses }) => {
-  let ratio = Math.round((wins / (wins + losses)) * 100);
-  let lowercaseTier = tier[0] + tier.slice(1).toLowerCase();
-  let profileImgSrc = `http://avatar.leagueoflegends.com/na1/${name}.png`;
-  let rankColor = rankToColor[lowercaseTier];
+let WinsText = ({ wins }) => <span style={{ color: "green" }}>{wins}W</span>;
+
+let LossesText = ({ losses }) => (
+  <span style={{ color: "red" }}>{losses}L</span>
+);
+
+let RecentGameInfo = recentMatches => {
+  let matches = recentMatches.recentMatches;
+  if (!matches) {
+    return "";
+  }
+
+  let lastMatchResult = matches[0];
+  let streakEnd = false;
+  let streakGames = 0;
+  let wins = 0;
+
+  matches.forEach(match => {
+    if (match) {
+      ++wins;
+    }
+    if (!streakEnd && match === lastMatchResult) {
+      streakGames += match ? 1 : -1;
+    }
+    if (match !== lastMatchResult) {
+      streakEnd = true;
+    }
+  });
+
+  let losses = matches.length - wins;
+  let recentRatio = Math.round((wins / matches.length) * 100);
+
+  let streakColor =
+    streakGames > 0 ? "green" : streakGames === 0 ? "black" : "red";
+
+  let streakPrefix = streakGames > 0 ? "+" : ""; // - already included;
 
   return (
-    <tr className="text-center">
+    <div>
+      <WinsText wins={wins} /> / <LossesText losses={losses} />
+      <br />({recentRatio}%)
+      <br />
+      <small>
+        Streak:{" "}
+        <span style={{ color: streakColor }}>
+          {streakPrefix}
+          {streakGames}
+        </span>
+      </small>
+    </div>
+  );
+};
+
+const StatsRow = ({
+  name,
+  tier,
+  rank,
+  points,
+  wins,
+  losses,
+  recentMatches
+}) => {
+  let ratio =
+    tier !== "Unranked" ? Math.round((wins / (wins + losses)) * 100) : "";
+  let lowercaseTier = tier[0] + tier.slice(1).toLowerCase();
+  let profileImgSrc = `http://avatar.leagueoflegends.com/na1/${name}.png`;
+  let pointsText = tier !== "Unranked" ? points + " pts" : "";
+
+  return (
+    <tr className=" text-center">
       <td style={{ height: "75px" }}>
-        <img src={profileImgSrc} style={{ height: "100%" }} /> {name}
+        <img src={profileImgSrc} style={{ height: "100%" }} />
+        <br /> {name}
       </td>
       <td>
-        <span style={{ color: rankColor }}>
+        <span style={{ color: rankToColor[lowercaseTier] }}>
           {lowercaseTier} {rank}
         </span>{" "}
         <br />
-        <small>{points} pts</small>
+        <small>{pointsText}</small>
       </td>
-      <td>Placeholder</td>
       <td>
-        <span style={{ color: "green" }}>{wins}W</span> /{" "}
-        <span style={{ color: "red" }}>{losses}L </span>({ratio}%)
+        <RecentGameInfo recentMatches={recentMatches} />
+      </td>
+      <td>
+        <WinsText wins={wins} /> / <LossesText losses={losses} />
+        <br />({ratio}%)
       </td>
     </tr>
   );
 };
 
-const StatsTable = ({ name, tier, rank, points, wins, losses }) => {
+const StatsTable = ({
+  name,
+  tier,
+  rank,
+  points,
+  wins,
+  losses,
+  recentMatches
+}) => {
   return (
     <div className="row">
       <div className="table-responsive">
-        <table className="table mt-5">
-          <thead className="thead">
-            <tr className="bg-light text-center">
+        <table className="table table-sm mt-5">
+          <thead className="thead text-center">
+            <tr className="bg-light">
               <th scope="col">Summoner</th>
               <th scope="col">Rank</th>
-              <th scope="col">Recent</th>
+              <th scope="col">Past 10</th>
               <th scope="col">Overall</th>
             </tr>
           </thead>
@@ -60,6 +134,7 @@ const StatsTable = ({ name, tier, rank, points, wins, losses }) => {
               points={points}
               wins={wins}
               losses={losses}
+              recentMatches={recentMatches}
             />
           </tbody>
         </table>
@@ -79,6 +154,7 @@ export class SummonerSearchResults extends Component {
       points: 0,
       wins: 0,
       losses: 0,
+      recentMatches: "",
       loaded: false
     };
   }
@@ -89,11 +165,13 @@ export class SummonerSearchResults extends Component {
       method: "get",
       success: data => {
         this.setState({
+          summonerName: data.name,
           tier: data.tier ? data.tier : "Unranked",
           rank: data.rank ? data.rank : "",
-          points: data.points ? data.points : "",
-          wins: data.wins ? data.wins : "",
-          losses: data.losses ? data.losses : "",
+          points: data.points,
+          wins: data.wins,
+          losses: data.losses,
+          recentMatches: data.recentMatches,
           loaded: true
         });
       }
@@ -104,14 +182,18 @@ export class SummonerSearchResults extends Component {
     return (
       <div>
         {this.state.loaded ? (
-          <StatsTable
-            name={this.state.summonerName}
-            tier={this.state.tier}
-            rank={this.state.rank}
-            points={this.state.points}
-            wins={this.state.wins}
-            losses={this.state.losses}
-          />
+          <div>
+            <StatsHeader />
+            <StatsTable
+              name={this.state.summonerName}
+              tier={this.state.tier}
+              rank={this.state.rank}
+              points={this.state.points}
+              wins={this.state.wins}
+              losses={this.state.losses}
+              recentMatches={this.state.recentMatches}
+            />
+          </div>
         ) : (
           <LoadingAnimation />
         )}

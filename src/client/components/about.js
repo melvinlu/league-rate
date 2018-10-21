@@ -10,7 +10,7 @@ export class About extends Component {
         <div className="row">
           <p className="lead mx-auto text-center">
             LolJudge provides a simple and fast way to analyze and predict
-            summoners' ranked performance.
+            ranked (solo/duo) performance of summoners.
           </p>
         </div>
       </div>

@@ -16,6 +16,7 @@ let getOverallInfo = summonerName => {
       return superagent
         .get(url)
         .then(data => {
+          console.log(data.body);
           let rankedStats = data.body.find(
             stats => stats.queueType === "RANKED_SOLO_5x5"
           );
@@ -34,6 +35,23 @@ let getOverallInfo = summonerName => {
     });
 };
 
+let requestMatchInfo = (accountId, matchId) => {
+  let url = `https://na1.api.riotgames.com/lol/match/v3/matches/${matchId}?api_key=${api_key}`;
+  return superagent
+    .get(url)
+    .then(data => {
+      let stats = data.body;
+      let playerId = stats.participantIdentities.find(
+        id => id.player.accountId === accountId
+      );
+      let id = playerId.participantId - 1;
+      return stats.participants[id].stats.win;
+    })
+    .catch(err => {
+      return;
+    });
+};
+
 let getRecentInfo = accountId => {
   let url = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${accountId}?queue=420&api_key=${api_key}`;
 
@@ -41,7 +59,12 @@ let getRecentInfo = accountId => {
     .get(url)
     .then(data => {
       let recentMatches = data.body.matches.slice(0, 10);
-      // TODO(melvinlu): implement...
+      let recentMatchIds = recentMatches.map(recentMatch => recentMatch.gameId);
+      return Promise.all(
+        recentMatchIds.map(recentMatchId =>
+          requestMatchInfo(accountId, recentMatchId)
+        )
+      );
     })
     .catch(err => {
       return;

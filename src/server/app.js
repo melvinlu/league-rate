@@ -15,29 +15,30 @@ let statsHelper = require("./stats.js");
 
 // API
 app.get("/search/:name", (req, res) => {
+  let summonerName = req.params.name;
+
   statsHelper
-    .getOverallInfo(req.params.name)
+    .getOverallInfo(summonerName)
     .then(data => {
-      let name = data.name;
+      let name = data.name; // registered name of summoner
       let stats = data.rankedStats;
 
       statsHelper
         .getRecentInfo(data.accountId)
         .then(data => {
-          if (stats) {
-            res.send({
-              name: name,
-              tier: stats.tier,
-              rank: stats.rank,
-              points: stats.leaguePoints,
-              wins: stats.wins,
-              losses: stats.losses
-            });
-          } else {
-            res.send({
-              name: name
-            });
-          }
+          // send recent game info if available
+          let dataToSend = stats
+            ? {
+                name: name,
+                tier: stats.tier,
+                rank: stats.rank,
+                points: stats.leaguePoints,
+                wins: stats.wins,
+                losses: stats.losses,
+                recentMatches: data
+              }
+            : { name: name };
+          res.send(dataToSend);
         })
         .catch(err => {
           console.log(`Error!: ${err}`);
