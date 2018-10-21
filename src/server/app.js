@@ -15,43 +15,50 @@ let statsHelper = require("./stats.js");
 
 // API
 app.get("/search/:name", (req, res) => {
-  let summonerName = req.params.name;
+  let summonerName = encodeURI(req.params.name);
 
   statsHelper
-    .getOverallInfo(summonerName)
+    .getStatsForSummoner(summonerName)
     .then(data => {
-      let name = data.name; // registered name of summoner
-      let stats = data.rankedStats;
-
-      statsHelper
-        .getRecentInfo(data.accountId)
-        .then(data => {
-          // send recent game info if available
-          let dataToSend = stats
-            ? {
-                name: name,
-                tier: stats.tier,
-                rank: stats.rank,
-                points: stats.leaguePoints,
-                wins: stats.wins,
-                losses: stats.losses,
-                recentMatches: data
-              }
-            : { name: name };
-          res.send(dataToSend);
-        })
-        .catch(err => {
-          console.log(`Error!: ${err}`);
-          res.send({
-            name: summonerName
-          });
-        });
+      res.send(data);
     })
     .catch(err => {
-      console.log(`Error!: ${err}`);
-      res.send({
-        name: summonerName
-      });
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+app.get("/ingame/:name", (req, res) => {
+  let summonerName = encodeURI(req.params.name);
+
+  statsHelper
+    .getInGameStatus(summonerName)
+    .then(data => {
+      if (data.inRankedGame) {
+        let teamIds = data.participants.map(participant => participant.team);
+        Promise.all(
+          data.participants.map(participant =>
+            statsHelper.getStatsForSummoner(encodeURI(participant.summonerName))
+          )
+        )
+          .then(data => {
+            res.send({
+              inRankedGame: true,
+              teamStats: data,
+              teamIds: teamIds
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).send(err);
+          });
+      } else {
+        res.send({ inRankedGame: false });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
     });
 });
 

@@ -1,6 +1,43 @@
 let api_key = process.env.API_KEY;
 let superagent = require("superagent");
 
+const CURRENT_SEASON = 11;
+
+let getStatsForSummoner = summonerName => {
+  return getOverallInfo(summonerName)
+    .then(data => {
+      let name = data.name; // registered name of summoner
+      let stats = data.rankedStats;
+
+      return getRecentInfo(data.accountId)
+        .then(data => {
+          // send recent game info if available
+          return stats
+            ? {
+                name: name,
+                tier: stats.tier,
+                rank: stats.rank,
+                points: stats.leaguePoints,
+                wins: stats.wins,
+                losses: stats.losses,
+                recentMatches: data
+              }
+            : {
+                name: name,
+                recentMatches: data
+              };
+        })
+        .catch(err => {
+          console.log(err);
+          throw err;
+        });
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
+
 let getOverallInfo = summonerName => {
   let url = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`;
 
@@ -16,7 +53,6 @@ let getOverallInfo = summonerName => {
       return superagent
         .get(url)
         .then(data => {
-          console.log(data.body);
           let rankedStats = data.body.find(
             stats => stats.queueType === "RANKED_SOLO_5x5"
           );
@@ -27,11 +63,13 @@ let getOverallInfo = summonerName => {
           };
         })
         .catch(err => {
-          return;
+          console.log(err);
+          throw err;
         });
     })
     .catch(err => {
-      return;
+      console.log(err);
+      throw err;
     });
 };
 
@@ -42,13 +80,16 @@ let requestMatchInfo = (accountId, matchId) => {
     .then(data => {
       let stats = data.body;
       let playerId = stats.participantIdentities.find(
-        id => id.player.accountId === accountId
+        id =>
+          id.player.currentAccountId === accountId ||
+          id.player.accountId === accountId
       );
       let id = playerId.participantId - 1;
       return stats.participants[id].stats.win;
     })
     .catch(err => {
-      return;
+      console.log(err);
+      throw err;
     });
 };
 
@@ -59,7 +100,12 @@ let getRecentInfo = accountId => {
     .get(url)
     .then(data => {
       let recentMatches = data.body.matches.slice(0, 10);
-      let recentMatchIds = recentMatches.map(recentMatch => recentMatch.gameId);
+      let recentMatchIds = [];
+      recentMatches.forEach(recentMatch => {
+        if (recentMatch.season === CURRENT_SEASON) {
+          recentMatchIds.push(recentMatch.gameId);
+        }
+      });
       return Promise.all(
         recentMatchIds.map(recentMatchId =>
           requestMatchInfo(accountId, recentMatchId)
@@ -67,11 +113,46 @@ let getRecentInfo = accountId => {
       );
     })
     .catch(err => {
-      return;
+      console.log(err);
+      throw err;
+    });
+};
+
+let getInGameStatus = summonerName => {
+  let url = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`;
+
+  return superagent
+    .get(url)
+    .then(data => {
+      let url = `https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/${
+        data.body.id
+      }?api_key=${api_key}`;
+
+      return superagent
+        .get(url)
+        .then(data => {
+          let inRankedGame = data.body.gameQueueConfigId === 420;
+          let summoners = data.body.participants.map(participant => ({
+            summonerName: participant.summonerName,
+            team: participant.teamId
+          }));
+          return {
+            inRankedGame: inRankedGame,
+            participants: summoners
+          };
+        })
+        .catch(err => {
+          console.log(err);
+          throw err;
+        });
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
     });
 };
 
 module.exports = {
-  getOverallInfo: getOverallInfo,
-  getRecentInfo: getRecentInfo
+  getStatsForSummoner: getStatsForSummoner,
+  getInGameStatus: getInGameStatus
 };
