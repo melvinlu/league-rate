@@ -124,7 +124,6 @@ let getInGameStatus = summonerName => {
   return superagent
     .get(url)
     .then(data => {
-      console.log(data);
       let url = `https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${
         data.body.id
       }?api_key=${api_key}`;
@@ -147,7 +146,6 @@ let getInGameStatus = summonerName => {
         });
     })
     .catch(err => {
-      console.log(err);
       throw err;
     });
 };
