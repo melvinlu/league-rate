@@ -1,7 +1,7 @@
 let api_key = process.env.API_KEY;
 let superagent = require("superagent");
 
-const CURRENT_SEASON = 11;
+const CURRENT_SEASON = 13;
 
 let getStatsForSummoner = summonerName => {
   return getOverallInfo(summonerName)
@@ -39,14 +39,14 @@ let getStatsForSummoner = summonerName => {
 };
 
 let getOverallInfo = summonerName => {
-  let url = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`;
+  let url = `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`;
 
   return superagent
     .get(url)
     .then(data => {
       let name = data.body.name;
       let accountId = data.body.accountId;
-      let url = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${
+      let url = `https://na1.api.riotgames.com/lol/league/v4/positions/by-summoner/${
         data.body.id
       }?api_key=${api_key}`;
 
@@ -74,7 +74,7 @@ let getOverallInfo = summonerName => {
 };
 
 let requestMatchInfo = (accountId, matchId) => {
-  let url = `https://na1.api.riotgames.com/lol/match/v3/matches/${matchId}?api_key=${api_key}`;
+  let url = `https://na1.api.riotgames.com/lol/match/v4/matches/${matchId}?api_key=${api_key}`;
   return superagent
     .get(url)
     .then(data => {
@@ -94,7 +94,7 @@ let requestMatchInfo = (accountId, matchId) => {
 };
 
 let getRecentInfo = accountId => {
-  let url = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${accountId}?queue=420&api_key=${api_key}`;
+  let url = `https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/${accountId}?queue=420&api_key=${api_key}`;
 
   return superagent
     .get(url)
@@ -119,12 +119,13 @@ let getRecentInfo = accountId => {
 };
 
 let getInGameStatus = summonerName => {
-  let url = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`;
+  let url = `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`;
 
   return superagent
     .get(url)
     .then(data => {
-      let url = `https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/${
+      console.log(data);
+      let url = `https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${
         data.body.id
       }?api_key=${api_key}`;
 
@@ -142,7 +143,6 @@ let getInGameStatus = summonerName => {
           };
         })
         .catch(err => {
-          console.log(err);
           throw err;
         });
     })
