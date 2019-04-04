@@ -49,7 +49,6 @@ app.get("/ingame/:name", (req, res) => {
             });
           })
           .catch(err => {
-            console.log(err);
             res.status(500).send(err);
           });
       } else {
@@ -57,7 +56,9 @@ app.get("/ingame/:name", (req, res) => {
       }
     })
     .catch(err => {
-      console.log(err);
+      if (err.status !== 404) {
+        console.log(err);
+      }
       res.status(500).send(err);
     });
 });
